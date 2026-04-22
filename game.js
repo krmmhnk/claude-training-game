@@ -650,6 +650,41 @@ const MISSIONS = [
         correct: 0, explanation: '正解！push 後に数分待ってからアクセスし、それでも古い場合は Ctrl+F5（強制リロード）で最新版が表示されます。GitHub Pages の反映には通常数十秒〜数分かかります。' }
     ]
   },
+  {
+    id: 26, island: 2, level: 4, icon: '🗑️',
+    title: 'いらないリポジトリを削除しよう！',
+    desc: '不要になったリポジトリの正しい削除方法を学ぼう。\n削除は取り消せないので、手順と注意点をしっかり確認！',
+    exp: 63,
+    briefing: {
+      story: '冒険者よ、旅を続けると\n「もう使わない荷物」が増えてくる。\n\nテスト用に作ったリポジトリ、\n失敗作のプロジェクト…\n\nそれらをきれいに片付ける方法を学ぼう。\nただし——削除は一発勝負だ。慎重にな。',
+      knowledge: [
+        { term: 'リポジトリの削除方法（ブラウザ）',
+          desc: '① 削除したいリポジトリを GitHub で開く\n② 上部の「Settings」タブをクリック\n③ 一番下までスクロール\n④「Danger Zone」→「Delete this repository」\n⑤ リポジトリ名を入力して確認\n⑥「I understand, delete this repository」\n\n⚠️ 削除すると元に戻せない！' },
+        { term: 'GitHub CLI での削除方法',
+          desc: 'ターミナルから削除することもできる：\n\ngh repo delete ユーザー名/リポジトリ名 --yes\n\n例）gh repo delete krmmhnk/test --yes\n\n⚠️ 事前に「delete_repo」権限が必要：\ngh auth refresh -h github.com -s delete_repo\n\n権限追加後、ブラウザで承認すれば削除できる。' },
+        { term: '削除前に確認すること',
+          desc: '削除する前に必ず確認しよう：\n\n・本当に不要か？（後悔しない？）\n・GitHub Pages で公開中ではないか？\n・チームメンバーが使っていないか？\n・ローカルにコピーが残っているか？\n\n迷ったら「Archive（アーカイブ）」という\n選択肢もある。\n→ 削除せず読み取り専用で保存できる。' }
+      ],
+      goal: 'リポジトリの削除手順・CLI での削除方法・\n削除前の確認事項を理解しよう。'
+    },
+    questions: [
+      { q: 'GitHub でリポジトリを削除するとき、設定画面のどこにある？',
+        choices: ['Settings → 一番上の「General」', 'Settings → 一番下の「Danger Zone」', 'Code タブ → Delete', 'Profile → Repository → Delete'],
+        correct: 1, explanation: '正解！リポジトリの削除は Settings の一番下「Danger Zone」にあります。危険な操作なので意図的に目立たない場所に置かれています。' },
+      { q: 'GitHub でリポジトリを削除した後、元に戻すことは？',
+        choices: ['24時間以内なら復元できる', 'GitHub サポートに連絡すれば必ず戻せる', '基本的に元に戻せない（ローカルのコピーがあれば再作成は可能）', '30日間はゴミ箱に残る'],
+        correct: 2, explanation: '正解！GitHub のリポジトリ削除は基本的に取り消しできません。削除前にローカルにコピーがあるか確認し、本当に不要かよく考えてから実行しましょう。' },
+      { q: 'GitHub CLI でリポジトリを削除するコマンドは？',
+        choices: ['git remove リポジトリ名', 'gh repo delete ユーザー名/リポジトリ名 --yes', 'gh delete repo リポジトリ名', 'git repo rm リポジトリ名'],
+        correct: 1, explanation: '正解！gh repo delete ユーザー名/リポジトリ名 --yes でターミナルから削除できます。事前に gh auth refresh で delete_repo 権限を追加しておく必要があります。' },
+      { q: 'すぐには削除したくないが、もう変更はしないリポジトリの最善の扱いは？',
+        choices: ['そのまま放置する', 'README.md を削除する', 'Archive（アーカイブ）にして読み取り専用で保存する', '全ファイルを削除してリポジトリだけ残す'],
+        correct: 2, explanation: '正解！Archive（アーカイブ）にすると削除せずに読み取り専用で保存できます。Settings → Danger Zone → Archive this repository から設定できます。' },
+      { q: 'GitHub CLI でリポジトリ削除に必要な追加権限は？',
+        choices: ['admin_repo', 'delete_repo', 'repo_delete', 'manage_repo'],
+        correct: 1, explanation: '正解！リポジトリ削除には delete_repo スコープが必要です。gh auth refresh -h github.com -s delete_repo を実行してブラウザで承認すると権限が追加されます。' }
+    ]
+  },
 
   // =====================
   // 💻 コンピューターの島
