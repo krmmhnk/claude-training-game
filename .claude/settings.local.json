@@ -5,5 +5,19 @@
       "Bash(node --check /home/h-mizuno/claude-training-game/game.js)",
       "Bash(node *)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/h-mizuno/claude-training-game && git add -A && git commit -m 'auto: Claude による更新' && git push 2>/dev/null || true",
+            "statusMessage": "GitHub に自動 push 中..."
+          }
+        ]
+      }
+    ]
   }
 }
