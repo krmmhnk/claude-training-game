@@ -652,6 +652,220 @@ const MISSIONS = [
   },
 
   // =====================
+  // 💻 コンピューターの島
+  // =====================
+  {
+    id: 20, island: 3, level: 1, icon: '⬛',
+    title: 'ターミナルの正体を暴け！',
+    desc: 'あの「黒い画面」の正体が明らかになる！\nクリックなしでコンピューターを操る「ターミナル」の世界へようこそ。',
+    exp: 30,
+    briefing: {
+      story: 'ここは「コンピューターの島」だ。\n\nClaude Code を本当に使いこなすには\n「ターミナル」という武器を理解せねばならない。\n\nアイコンもクリックもない。\n文字だけでコンピューターを操る世界へ\n足を踏み入れよう。',
+      knowledge: [
+        { term: 'ターミナルとは？',
+          desc: 'コンピューターに「文字で命令を送る画面」のこと。\n\n【普通の操作（GUI）】\nアイコンをダブルクリック → フォルダが開く\n\n【ターミナルの操作（CUI）】\n「cd Documents」と入力 → フォルダに移動\n\nどちらも同じことをしているが、\nターミナルの方が自動化・一括処理が得意。' },
+        { term: 'なぜターミナルを使うのか？',
+          desc: 'クリック操作では難しいことができる：\n\n・1000個のファイルを一括で処理する\n・プログラムを自動で動かし続ける\n・遠くのサーバーを操作する\n・Claude Code を起動する\n\nエンジニアが「黒い画面」を好むのは、\n最も効率的な方法だからだ。' },
+        { term: 'Windows の場合：WSL とは？',
+          desc: 'Windows には「WSL」という特別な仕組みがある。\n\nWSL ＝ Windows の中で\n　　　「Linux（別のOS）」を動かす機能\n\nClaude Code は Linux 環境で動くため、\nWindows ユーザーは WSL を使う。\n\n【起動方法】\nスタートメニュー →「Ubuntu」で検索 → 起動\n→ 黒い画面が開けば成功！' }
+      ],
+      goal: 'ターミナルの意味・使う理由・\nWSL の仕組みを理解しよう。'
+    },
+    questions: [
+      { q: 'ターミナルを一言で説明すると？',
+        choices: ['インターネットブラウザの一種', 'コンピューターに文字で命令を送る画面', 'メール送受信ソフト', 'ウイルス対策ソフト'],
+        correct: 1, explanation: '正解！ターミナルは「文字を打ってコンピューターに命令する」画面です。マウスクリック不要で、自動化や大量処理が得意です。' },
+      { q: 'GUI（グラフィカルユーザーインターフェース）とは？',
+        choices: ['文字だけで操作する方法', 'アイコンやボタンをクリックして操作する方法', 'キーボードショートカットのこと', 'プログラミング言語の一種'],
+        correct: 1, explanation: '正解！GUI はアイコン・ボタン・ウィンドウなど視覚的な要素をクリックして操作する方式です。普段 Windows や Mac で使っているのが GUI です。' },
+      { q: 'ターミナルが GUI より得意なことは？',
+        choices: ['写真を見ること', '動画を再生すること', '大量ファイルの一括処理や作業の自動化', 'ゲームのプレイ'],
+        correct: 2, explanation: '正解！ターミナルは繰り返し作業の自動化・大量処理が得意です。Claude Code のような開発ツールもターミナルで動きます。' },
+      { q: 'Windows で「WSL」とは何のこと？',
+        choices: ['Windows のセキュリティソフト', 'Windows の中で Linux（別のOS）を動かす仕組み', 'インターネットの接続設定', 'Windows のバックアップ機能'],
+        correct: 1, explanation: '正解！WSL（Windows Subsystem for Linux）は Windows の中で Linux を動かす仕組みです。Claude Code は Linux 環境で動くため、Windows ユーザーは WSL を使います。' },
+      { q: 'ターミナルで Claude Code を起動するコマンドは？',
+        choices: ['start claude', 'run claude', 'claude', 'open claude-code'],
+        correct: 2, explanation: '正解！ターミナルで「claude」と入力して Enter を押すだけで Claude Code が起動します。これがすべての始まりです。' }
+    ]
+  },
+  {
+    id: 21, island: 3, level: 1, icon: '📁',
+    title: 'ファイルとフォルダの世界',
+    desc: 'コンピューターの中身は「ファイル」と「フォルダ」でできている！\n地図の読み方を覚えて、迷子にならないようにしよう。',
+    exp: 30,
+    briefing: {
+      story: 'コンピューターの中は\nまるで大きな図書館だ。\n\n本（ファイル）が棚（フォルダ）に整理されて\n並んでいる。\n\nその図書館の地図を読めるようになれば、\nターミナルで迷子にならずに済む。',
+      knowledge: [
+        { term: 'ファイルとフォルダの違い',
+          desc: '【ファイル】\n内容が入っている「本」のようなもの。\n例）game.js・index.html・README.md\n\n【フォルダ（ディレクトリ）】\nファイルをまとめる「本棚」のようなもの。\n例）claude-training-game・Documents・Downloads\n\nフォルダの中にフォルダを入れることもできる。' },
+        { term: 'カレントディレクトリ',
+          desc: '「今どこにいるか」を表す場所のこと。\n\nターミナルを開いたとき、\n必ずどこかのフォルダの中にいる。\nそこが「カレントディレクトリ」だ。\n\n現在地を確認するコマンド：\n　pwd（Print Working Directory）\n\n例）/home/h-mizuno と表示 →\n　h-mizuno フォルダの中にいる' },
+        { term: 'ルートディレクトリ',
+          desc: 'フォルダの一番上（大元）のこと。\n\nLinux/Mac では「/」（スラッシュ）で表す。\nWindows では「C:\\」。\n\nすべてのファイル・フォルダは\nここを起点に枝分かれしている。\n\n例）/ → home → h-mizuno → claude-training-game' }
+      ],
+      goal: 'ファイル・フォルダ・カレントディレクトリ・\nルートディレクトリの意味を理解しよう。'
+    },
+    questions: [
+      { q: 'ファイルとフォルダの違いを正しく説明しているのはどれ？',
+        choices: ['ファイルとフォルダは同じもの', 'ファイルは内容が入った「本」、フォルダはファイルをまとめる「本棚」', 'フォルダは内容が入った「本」、ファイルはまとめる「本棚」', 'どちらも内容が入っている'],
+        correct: 1, explanation: '正解！ファイルは game.js や README.md のような「内容のあるもの」、フォルダは複数のファイルをまとめる「入れ物」です。' },
+      { q: '「カレントディレクトリ」とは何のこと？',
+        choices: ['最も古いフォルダ', '今ターミナルで操作している「現在地」のフォルダ', '削除されたファイルの置き場所', 'インターネットのキャッシュ'],
+        correct: 1, explanation: '正解！カレントディレクトリは「今いる場所」です。地図でいう「現在地」のようなもの。ターミナルは常にどこかのフォルダの中で操作しています。' },
+      { q: '現在のカレントディレクトリを確認するコマンドは？',
+        choices: ['ls', 'cd', 'pwd', 'dir'],
+        correct: 2, explanation: '正解！pwd（Print Working Directory）は「今どこにいるか」を表示するコマンドです。/home/h-mizuno のように現在地のパスが表示されます。' },
+      { q: 'Linux でファイルの一番上の大元（ルートディレクトリ）はどれ？',
+        choices: ['C:\\', '/', 'root/', 'home/'],
+        correct: 1, explanation: '正解！Linux/Mac ではルートディレクトリを「/」（スラッシュ1文字）で表します。すべてのフォルダ・ファイルはここを起点にしています。' },
+      { q: 'フォルダの中にフォルダを入れることは？',
+        choices: ['できない。フォルダは1階層のみ', 'できる。入れ子（ネスト）にして階層を作れる', 'できるが有料ソフトが必要', 'フォルダの中にはファイルのみ入れられる'],
+        correct: 1, explanation: '正解！フォルダの中にフォルダを入れることができます。これを「階層構造」と言います。Documents の中に 2024 フォルダがあり、その中に報告書.pdf がある、といった構造です。' }
+    ]
+  },
+  {
+    id: 22, island: 3, level: 1, icon: '⌨️',
+    title: 'コマンドで世界を操れ！',
+    desc: '「ls」「cd」「mkdir」——これを覚えれば\nターミナルの基本操作は完璧だ！',
+    exp: 30,
+    briefing: {
+      story: '地図の読み方を覚えた冒険者よ。\n次は「移動の技」を身につけよう。\n\nターミナルで最も使うコマンドは3つだ。\nこれさえ覚えれば、どこへでも行ける。',
+      knowledge: [
+        { term: 'ls — 今いる場所のファイル一覧を見る',
+          desc: 'ls（エルエス）＝ List の略\n\n使い方：ls\n→ 今いるフォルダのファイル・フォルダ一覧が表示\n\nよく使うオプション：\n・ls -l  → 詳細情報も表示\n・ls -a  → 隠しファイルも表示\n\n「今ここに何があるか確認したい」ときに使う。' },
+        { term: 'cd — 別のフォルダに移動する',
+          desc: 'cd（シーディー）＝ Change Directory の略\n\n使い方：\n・cd フォルダ名  → そのフォルダに入る\n・cd ..         → 一つ上のフォルダに戻る\n・cd ~          → ホームフォルダに戻る\n・cd /          → 一番上（ルート）に移動\n\n例）cd claude-training-game\n→ claude-training-game フォルダへ移動' },
+        { term: 'mkdir — 新しいフォルダを作る',
+          desc: 'mkdir（エムケーディーアイアール）\n＝ Make Directory の略\n\n使い方：mkdir フォルダ名\n\n例）mkdir my-project\n→ my-project という名前のフォルダを作成\n\nその他よく使うコマンド：\n・touch ファイル名  → 空のファイルを作る\n・cat ファイル名   → ファイルの中身を表示' }
+      ],
+      goal: 'ls・cd・mkdir の意味と使い方を\n正確に覚えよう。'
+    },
+    questions: [
+      { q: '「ls」コマンドは何をするもの？',
+        choices: ['ファイルを削除する', '今いるフォルダのファイル・フォルダ一覧を表示する', '別のフォルダに移動する', 'ファイルをコピーする'],
+        correct: 1, explanation: '正解！ls（List）は現在地のファイル一覧を表示するコマンドです。「今ここに何がある？」と確認したいときに使います。' },
+      { q: '「cd Documents」と入力すると何が起きる？',
+        choices: ['Documents というファイルを削除する', 'Documents フォルダの中に移動する', 'Documents フォルダを作成する', 'Documents の中身を表示する'],
+        correct: 1, explanation: '正解！cd（Change Directory）は指定したフォルダへ移動するコマンドです。「cd Documents」で Documents フォルダに入れます。' },
+      { q: '「cd ..」と入力すると何が起きる？',
+        choices: ['一番上（ルート）に移動する', 'ホームフォルダに移動する', '一つ上のフォルダに戻る', '現在地のフォルダを削除する'],
+        correct: 2, explanation: '正解！「..」は「一つ上のフォルダ」を意味します。cd .. で今いるフォルダの親フォルダに戻れます。' },
+      { q: '新しいフォルダ「my-project」を作るコマンドは？',
+        choices: ['touch my-project', 'mkdir my-project', 'cd my-project', 'ls my-project'],
+        correct: 1, explanation: '正解！mkdir（Make Directory）は新しいフォルダを作るコマンドです。mkdir my-project で my-project フォルダが作成されます。' },
+      { q: 'ファイルの中身をターミナルで表示したいとき使うコマンドは？',
+        choices: ['ls', 'open', 'cat', 'view'],
+        correct: 2, explanation: '正解！cat（Concatenate）はファイルの中身をターミナルに表示するコマンドです。cat README.md で README の内容が表示されます。' }
+    ]
+  },
+  {
+    id: 23, island: 3, level: 2, icon: '🗺️',
+    title: 'パスの謎を解き明かせ',
+    desc: 'ファイルの「住所」＝パスを読めるようになれば\nターミナル操作が一気にラクになる！',
+    exp: 40,
+    briefing: {
+      story: 'コマンドを覚えた冒険者よ。\n\n次の難関は「パス」だ。\n\nパスとはファイルやフォルダの「住所」のこと。\n住所を読めれば、どんな場所のファイルでも\n一発で指定できるようになる。',
+      knowledge: [
+        { term: '絶対パス（フルパス）',
+          desc: 'ルート（/）から始まる完全な住所のこと。\n\n例）/home/h-mizuno/claude-training-game/game.js\n\n読み方：\n/ （ルート）の中の\nhome フォルダの中の\nh-mizuno フォルダの中の\nclaude-training-game フォルダの中の\ngame.js ファイル\n\n→ どこにいても同じ場所を指す。' },
+        { term: '相対パス',
+          desc: '「今いる場所」を基準にした住所のこと。\n\n例）今 /home/h-mizuno にいる場合：\n・claude-training-game/game.js\n　→ 今いる場所から見た位置\n\n特殊な記号：\n・.  （ドット）→ 今いる場所自身\n・.. （ドットドット）→ 一つ上のフォルダ\n\n例）../other-project → 隣のフォルダ' },
+        { term: '～（チルダ）＝ ホームディレクトリ',
+          desc: '「～」はホームディレクトリの省略記号。\n\nホームディレクトリ＝\n自分専用のフォルダ（出発地点）\n例）/home/h-mizuno\n\n使い方：\n・cd ~  → ホームに戻る（最速の帰り道）\n・~/claude-training-game\n　→ /home/h-mizuno/claude-training-game と同じ' }
+      ],
+      goal: '絶対パスと相対パスの違い・\n～（チルダ）の意味を理解しよう。'
+    },
+    questions: [
+      { q: '「/home/h-mizuno/Documents/report.pdf」はどんなパス？',
+        choices: ['相対パス（今いる場所を基準にした住所）', '絶対パス（ルートから始まる完全な住所）', 'URL（インターネットの住所）', 'エラーメッセージ'],
+        correct: 1, explanation: '正解！「/」で始まるパスは絶対パス（フルパス）です。ルートディレクトリからの完全な住所なので、どこにいても同じ場所を指します。' },
+      { q: '今 /home/h-mizuno にいて「cd Documents」と入力した。移動先は？',
+        choices: ['/Documents', '/home/Documents', '/home/h-mizuno/Documents', '/h-mizuno/Documents'],
+        correct: 2, explanation: '正解！相対パスは「今いる場所（/home/h-mizuno）」を起点にします。cd Documents は /home/h-mizuno/Documents に移動します。' },
+      { q: '「～」（チルダ）が示す場所は？',
+        choices: ['ルートディレクトリ（/）', '現在のフォルダ', '自分専用のホームディレクトリ（例：/home/h-mizuno）', '一つ上のフォルダ'],
+        correct: 2, explanation: '正解！～はホームディレクトリの省略記号です。cd ～ と入力すれば /home/自分のユーザー名 に戻れます。迷子になったときの最速の帰り道です。' },
+      { q: '「..」（ドットドット）が示す場所は？',
+        choices: ['ルートディレクトリ（/）', 'ホームディレクトリ', '一つ上（親）のフォルダ', '一つ下（子）のフォルダ'],
+        correct: 2, explanation: '正解！「..」は一つ上の親フォルダを表します。cd .. で一段階上に移動、cd ../other-folder で隣のフォルダに移動できます。' },
+      { q: '今 /home/h-mizuno/a/b にいる。「cd ~/c」で移動する先は？',
+        choices: ['/home/h-mizuno/a/b/c', '/home/h-mizuno/a/c', '/home/h-mizuno/c', '/c'],
+        correct: 2, explanation: '正解！～は /home/h-mizuno に展開されるので、cd ~/c は /home/h-mizuno/c に移動します。現在地がどこでも、～を使えば一発でホームの下に行けます。' }
+    ]
+  },
+  {
+    id: 24, island: 3, level: 2, icon: '🔍',
+    title: 'Claude Code がファイルを読む仕組み',
+    desc: 'Claude Code はなぜプロジェクト全体を理解できるのか？\nその秘密はファイルの読み込み方にある！',
+    exp: 40,
+    briefing: {
+      story: '冒険者よ、ここは重要な知識だ。\n\n「なぜ Claude Code は\nファイルの内容を知っているのか？」\n\nClaude はエスパーではない。\nちゃんとした仕組みがある。\nそれを理解すれば、より賢く使いこなせる。',
+      knowledge: [
+        { term: 'Claude Code は「起動したフォルダ」を見る',
+          desc: 'Claude Code を起動すると、\n「今いるフォルダ（カレントディレクトリ）」を\n自動でスキャンする。\n\nだから、プロジェクトフォルダの中で\nclaude と入力することが重要！\n\n【正しい使い方】\n① cd claude-training-game  ← まず移動\n② claude                   ← 起動\n\n【NG な使い方】\nどこか別のフォルダで claude を起動する\n→ プロジェクトのファイルが見えない！' },
+        { term: 'CLAUDE.md は自動で読み込まれる',
+          desc: 'プロジェクトフォルダに CLAUDE.md があると、\nClaude Code が起動するたびに\n自動的に読み込む。\n\nつまり CLAUDE.md に書いた内容は、\n毎回「最初から知っている」状態になる。\n\n例）\n・このプロジェクトのルール\n・よく使うコマンド\n・やってはいけないこと\n\n→ 毎回説明しなくてよくなる！' },
+        { term: 'Claude Code がファイルを読む方法',
+          desc: 'Claude Code は以下の方法でファイルを読む：\n\n① 自動スキャン\n　起動時にフォルダ構造を把握する\n\n② 要求に応じて読む\n　「このファイルを直して」と言われたとき\n\n③ ツールで読む\n　Read ツール・Grep ツールなど\n\n大量のファイルがあっても\n必要なものだけ読む仕組みになっている。' }
+      ],
+      goal: '正しいフォルダで起動することの重要性・\nCLAUDE.md の自動読み込み・\nファイルの読み方を理解しよう。'
+    },
+    questions: [
+      { q: 'claude-training-game プロジェクトで作業したい。Claude Code を正しく起動する手順は？',
+        choices: ['どこでも「claude」と入力すれば自動でプロジェクトを見つけてくれる', 'まず「cd claude-training-game」でフォルダに移動し、そこで「claude」を起動する', 'Claude Code にプロジェクトのパスをメールで送る', 'ブラウザで claude.ai を開いてファイルをアップロードする'],
+        correct: 1, explanation: '正解！Claude Code は「起動したフォルダ」をプロジェクトとして認識します。必ず作業したいフォルダに cd で移動してから claude を起動しましょう。' },
+      { q: 'Claude Code が起動するたびに自動で読み込まれる特別なファイルは？',
+        choices: ['README.md', 'index.html', 'CLAUDE.md', 'package.json'],
+        correct: 2, explanation: '正解！CLAUDE.md はプロジェクトフォルダに置くと Claude Code が起動するたびに自動で読み込みます。ルール・コマンド・注意事項を書いておくと毎回説明不要になります。' },
+      { q: '別のフォルダで Claude Code を起動してしまった。どんな問題が起きる？',
+        choices: ['特に問題はない', 'Claude Code がクラッシュする', '目的のプロジェクトのファイルが見えず、엉뚱な場所で作業してしまう', 'GitHubが使えなくなる'],
+        correct: 2, explanation: '正解！Claude Code は起動したフォルダのファイルしか見えません。プロジェクトの外で起動すると、ファイルにアクセスできず的外れな回答をしてしまいます。' },
+      { q: 'Claude Code は大量のファイルがあるプロジェクトでどうやってファイルを読む？',
+        choices: ['全ファイルを必ず最初から全部読む', 'ランダムに選んだファイルだけ読む', '必要なファイルだけを必要なタイミングで読む', '最初の10ファイルだけ読む'],
+        correct: 2, explanation: '正解！Claude Code は指示に応じて必要なファイルだけを読みます。「このバグを直して」と言えば関連ファイルだけ読みます。全部読むより効率的です。' },
+      { q: 'CLAUDE.md に書いておくと特に効果的な内容は？',
+        choices: ['自分の誕生日', 'プロジェクトのルール・よく使うコマンド・注意事項', '天気予報', 'お気に入りの食べ物'],
+        correct: 1, explanation: '正解！CLAUDE.md には「このプロジェクトの約束事」を書きます。コーディングルール・禁止事項・よく使うコマンドを書けば、Claude Code が毎回同じ前提で作業してくれます。' }
+    ]
+  },
+  {
+    id: 25, island: 3, level: 3, icon: '🧠',
+    title: 'コンテキストウィンドウの秘密',
+    desc: 'Claude Code の「記憶の容量」の仕組みを知ろう！\nこれを理解すれば、長い作業でも効率よく進められる。',
+    exp: 50,
+    briefing: {
+      story: '最後の秘密を教えよう。\n\nClaude Code には「記憶の容量」がある。\n\n長い会話・大量のファイルを扱うと\n「記憶がいっぱい」になってしまう。\n\nその仕組みと対処法を知れば、\n大きなプロジェクトも怖くない。',
+      knowledge: [
+        { term: 'コンテキストウィンドウとは？',
+          desc: 'Claude が一度に「覚えていられる」情報量のこと。\n\nイメージ：机の広さ\n・机が広い → たくさんの書類を広げられる\n・机が狭い → 書類が多いとはみ出してしまう\n\n会話が長くなるほど、\nファイルを多く読むほど、\n「机の上」がいっぱいになっていく。\n\nいっぱいになると古い内容を忘れてしまう。' },
+        { term: '/compact コマンド',
+          desc: 'コンテキストがいっぱいになってきたら\n/compact を使おう。\n\n/compact ＝ 会話の要約を作り、\n　　　　　　古い内容を圧縮する\n\n効果：\n・コンテキストの空きが増える\n・大切な情報は残してくれる\n・作業を続けられる\n\n「机の上を整理して、重要書類だけ残す」\nようなイメージだ。' },
+        { term: 'セッションを越えた記憶の仕組み',
+          desc: 'Claude Code を閉じると会話の記憶は消える。\n（コンテキストはセッション限り）\n\n【次の会話に引き継ぐ方法】\n① CLAUDE.md に重要情報を書いておく\n　→ 次回起動時に自動で読み込まれる\n\n② メモリ機能に保存する\n　→「これを記憶して」と頼む\n\n③ ファイルに書き残す\n　→「続きをやって」と伝えれば再開できる' }
+      ],
+      goal: 'コンテキストウィンドウの意味・\n/compact の使い方・\nセッションをまたぐ方法を理解しよう。'
+    },
+    questions: [
+      { q: 'コンテキストウィンドウとは何のこと？',
+        choices: ['ターミナルの画面サイズ', 'Claude が一度に覚えていられる情報量（記憶の容量）', 'インターネットの通信速度', 'ファイルの保存場所'],
+        correct: 1, explanation: '正解！コンテキストウィンドウは Claude の「記憶の容量」です。会話が長くなるほどいっぱいになり、古い内容から忘れていきます。' },
+      { q: 'コンテキストがいっぱいになるとどうなる？',
+        choices: ['Claude Code がクラッシュして使えなくなる', 'パソコンが再起動される', '会話の古い部分を忘れ、的外れな返答が増える', '自動でファイルが削除される'],
+        correct: 2, explanation: '正解！コンテキストがいっぱいになると Claude は古い内容を「忘れ」ます。長い作業では /compact で圧縮するか、新しいセッションを始めましょう。' },
+      { q: '/compact コマンドは何をしてくれる？',
+        choices: ['全ての会話履歴を削除する', '会話を要約・圧縮してコンテキストの空きを増やす', 'ファイルを圧縮してサイズを小さくする', 'Claude Code を再起動する'],
+        correct: 1, explanation: '正解！/compact は長い会話を要約して圧縮し、コンテキストの空きを作ってくれます。大切な情報はちゃんと残してくれます。' },
+      { q: 'Claude Code を閉じると、その会話の内容はどうなる？',
+        choices: ['自動でクラウドに保存される', 'CLAUDE.md に自動保存される', 'セッション（その会話）の記憶は消える', 'GitHubに自動でアップされる'],
+        correct: 2, explanation: '正解！Claude Code のコンテキスト（会話の記憶）はセッション限りです。閉じると消えます。重要なことは CLAUDE.md やメモリに保存しておきましょう。' },
+      { q: '長い作業を別の日に続けるための最善策は？',
+        choices: ['何もしない。Claude Code が自動で覚えている', 'CLAUDE.md に状況や続きの指示を書いておき、次回「CLAUDE.md を読んで続きをやって」と伝える', 'Claude Code の有料プランに加入する', '毎回最初から説明し直す'],
+        correct: 1, explanation: '正解！CLAUDE.md に「現在の状況」「次にやること」を書いておけば、次のセッションでもスムーズに再開できます。これが Claude Code をプロジェクトで使いこなす基本テクニックです。' }
+    ]
+  },
+
+  // =====================
   // 🎓 エピローグ
   // =====================
   {
@@ -910,8 +1124,20 @@ function renderMap() {
 
   MISSIONS.filter(m => m.island === 2 && !m.epilogue).forEach(m => list.appendChild(createMissionCard(m)));
 
-  // エピローグ（全17ミッションクリア後に解放）
-  const allDone = MISSIONS.filter(m => !m.epilogue).every(m => state.completedMissions.includes(m.id));
+  const bridge2 = document.createElement('div');
+  bridge2.className = 'island-bridge';
+  bridge2.innerHTML = `<div class="bridge-ship">🚀</div><p class="bridge-label">💻 コンピューターの島</p><p class="bridge-sub">ターミナルの仕組みを１から学ぼう</p>`;
+  list.appendChild(bridge2);
+
+  const hdr3 = document.createElement('div');
+  hdr3.className = 'island-header';
+  hdr3.innerHTML = '💻&nbsp;コンピューターの島';
+  list.appendChild(hdr3);
+
+  MISSIONS.filter(m => m.island === 3).forEach(m => list.appendChild(createMissionCard(m)));
+
+  // エピローグ（Claude の島＋GitHub の島クリア後に解放）
+  const allDone = MISSIONS.filter(m => !m.epilogue && m.island <= 2).every(m => state.completedMissions.includes(m.id));
   if (allDone) {
     const epilogueMission = MISSIONS.find(m => m.epilogue);
     const epCard = document.createElement('div');
