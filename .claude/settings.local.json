@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(node --check /home/h-mizuno/claude-training-game/game.js)",
+      "Bash(node *)"
+    ]
+  }
+}

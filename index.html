@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude マスター道場</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== タイトル画面 ===== -->
+<div id="screen-title" class="screen active">
+  <div class="title-box">
+    <h1 class="pixel-title">Claude<br>マスター道場</h1>
+    <div class="character-preview" id="title-char">
+      <div class="char-sprite" id="preview-sprite"></div>
+    </div>
+    <p class="subtitle">Claudeを使いこなして<br>最強のAIマスターになれ！</p>
+    <button class="pixel-btn" onclick="startGame()">▶ はじめる</button>
+    <button class="pixel-btn secondary" onclick="showScreen('screen-customize')">🎨 キャラカスタム</button>
+  </div>
+</div>
+
+<!-- ===== キャラカスタム画面 ===== -->
+<div id="screen-customize" class="screen">
+  <div class="window">
+    <h2 class="window-title">キャラクターカスタム</h2>
+    <div class="char-display">
+      <div class="char-sprite large" id="custom-sprite"></div>
+      <div class="char-name-box">
+        <label>なまえ：<input type="text" id="char-name" maxlength="8" placeholder="なまえ"></label>
+      </div>
+    </div>
+
+    <div class="custom-section">
+      <p class="section-label">🎨 からだの色</p>
+      <div class="color-options" id="body-colors"></div>
+    </div>
+
+    <div class="custom-section">
+      <p class="section-label">💇 かみ型</p>
+      <div class="hair-options" id="hair-options"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="outfit-section">
+      <p class="section-label">👗 ふく <span class="lock-badge">🔒 Lv.2 で解放</span></p>
+      <div class="color-options" id="outfit-colors"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="accessory-section">
+      <p class="section-label">💎 アクセサリー <span class="lock-badge">🔒 Lv.3 で解放</span></p>
+      <div class="accessory-options" id="accessory-options"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="bg-section">
+      <p class="section-label">🌈 背景カラー <span class="lock-badge">🔒 Lv.4 で解放</span></p>
+      <div class="color-options" id="bg-colors"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="title-section">
+      <p class="section-label">👑 称号 <span class="lock-badge">🔒 Lv.5 で解放</span></p>
+      <div class="accessory-options" id="title-options"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="eyecolor-section">
+      <p class="section-label">👁 目の色 <span class="lock-badge">🔒 Lv.6 で解放</span></p>
+      <div class="color-options" id="eye-colors"></div>
+    </div>
+
+    <div class="custom-section locked-section" id="haircolor-section">
+      <p class="section-label">💈 髪の色 <span class="lock-badge">🔒 Lv.6 で解放</span></p>
+      <div class="color-options" id="hair-colors"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="pixel-btn secondary" onclick="showScreen('screen-title')">◀ もどる</button>
+      <button class="pixel-btn" onclick="saveCustom()">✓ 保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== マップ画面 ===== -->
+<div id="screen-map" class="screen">
+  <div class="hud">
+    <div class="hud-char">
+      <div class="char-sprite small" id="map-sprite"></div>
+      <div class="hud-info">
+        <span id="hud-name">プレイヤー</span> <span id="hud-title" style="font-size:7px;color:#ffd700;"></span><br>
+        <span class="lv-text">Lv.<span id="hud-lv">1</span></span>
+      </div>
+    </div>
+    <div class="hud-right">
+      <div class="exp-bar-wrap">
+        <div class="exp-label">EXP</div>
+        <div class="exp-bar"><div class="exp-fill" id="exp-fill"></div></div>
+        <div class="exp-text" id="exp-text">0 / 100</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-area">
+    <h2 class="map-title">🗺 ミッションマップ</h2>
+    <div class="mission-list" id="mission-list"></div>
+    <div class="btn-row" style="margin-top:20px;">
+      <button class="pixel-btn secondary" onclick="showScreen('screen-title')">◀ タイトルへ</button>
+      <button class="pixel-btn secondary" onclick="showScreen('screen-customize')">🎨 キャラカスタム</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 依頼書画面 ===== -->
+<div id="screen-briefing" class="screen">
+  <div class="scroll-wrap">
+    <div class="scroll-header">
+      <span class="scroll-badge" id="brief-num">MISSION 1</span>
+      <span class="scroll-mission-title" id="brief-mission-title"></span>
+    </div>
+
+    <div class="scroll-body">
+      <p class="scroll-story" id="brief-story"></p>
+
+      <div class="knowledge-box" id="brief-knowledge"></div>
+
+      <div class="goal-box">
+        <p class="goal-label">📌 このミッションの目標</p>
+        <p class="goal-text" id="brief-goal"></p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="pixel-btn secondary" onclick="showScreen('screen-map')">◀ マップへ</button>
+      <button class="pixel-btn" id="brief-start-btn" onclick="startMissionFromBriefing()">⚔ ミッションへ挑め！</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ミッション画面 ===== -->
+<div id="screen-mission" class="screen">
+  <div class="window mission-window">
+    <div class="mission-header">
+      <span class="mission-num" id="m-num">MISSION 1</span>
+      <span class="mission-title-text" id="m-title"></span>
+    </div>
+    <div class="mission-desc" id="m-desc"></div>
+
+    <div id="quiz-area">
+      <div class="battle-scene" id="battle-scene">
+        <div class="scene-ground"></div>
+        <div class="scene-hero" id="scene-hero"></div>
+        <div class="scene-enemy" id="scene-enemy" style="display:none"></div>
+        <div class="scene-star" id="scene-star" style="display:none">★</div>
+      </div>
+      <div class="timer-wrap" id="timer-wrap">
+        <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+        <div class="timer-num" id="timer-num">30</div>
+      </div>
+      <p class="quiz-question" id="quiz-q"></p>
+      <div class="quiz-choices" id="quiz-choices"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-progress">
+      <span id="q-current">1</span> / <span id="q-total">3</span> 問
+    </div>
+
+    <div class="btn-row">
+      <button class="pixel-btn secondary" onclick="showScreen('screen-map')">◀ マップへ</button>
+      <button class="pixel-btn" id="next-btn" onclick="nextQuestion()" style="display:none">つぎへ ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== クリア演出画面 ===== -->
+<div id="screen-clear" class="screen">
+  <div class="clear-box">
+    <div class="clear-star">★</div>
+    <h2 class="clear-title">MISSION CLEAR!</h2>
+    <div class="char-sprite large bounce" id="clear-sprite"></div>
+    <p class="clear-msg" id="clear-msg"></p>
+    <div class="clear-reward" id="clear-reward"></div>
+    <button class="pixel-btn" onclick="showScreen('screen-map')">🗺 マップへもどる</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
