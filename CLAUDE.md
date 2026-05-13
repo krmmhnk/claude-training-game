@@ -59,6 +59,36 @@
      explanation: '正解！/compact を実行すると会話の履歴を要約・圧縮して、長いセッションでもコンテキスト上限を気にせず続けられます。' }
    ```
 
+## Mission 0「全体マップ」の自動メンテナンスルール
+
+**Claude の新機能・新製品・新プラン（Claude.ai / Claude Code / Claude for Work / デザイン支援など）について会話したとき、以下を自動で実行すること。**
+
+### 手順
+
+1. **質問に答える**（通常通り）
+
+2. **Mission 0 の `knowledge` を更新する**
+   - 既存の `term` に該当する内容なら、`desc` を加筆・修正する
+   - 新しいカテゴリの機能なら、新しい `{ term, desc }` オブジェクトを `knowledge` 配列に追加する
+
+3. **Mission 0 の `questions` にクイズを追加する**
+   - 新機能・新製品に関する4択問題を1問追加する
+   - フォーマットは通常のクイズ追加ルールと同じ
+
+4. **README.md の Mission 0 行を更新する**（問題数が変わった場合）
+
+### 対象となる話題の例
+
+| 話題 | 対応 |
+|------|------|
+| Claude の新モデル（Opus/Sonnet/Haiku など）| knowledge 更新 + クイズ追加 |
+| Claude Code の新機能（hooks・MCP など） | knowledge 更新 + クイズ追加 |
+| Claude for Work の新機能 | knowledge 更新 + クイズ追加 |
+| Claude の画像・デザイン機能の変化 | knowledge 更新 + クイズ追加 |
+| 新しいプラン・料金体系 | knowledge 更新 |
+
+---
+
 ## 問題ランダム出題について
 
 `game.js` の `startMission()` 内で `shuffle([...currentMission.questions])` を  
